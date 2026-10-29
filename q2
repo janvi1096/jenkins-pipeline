@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Install & Lint') {
+            steps {
+                echo 'Installing dependencies'
+            }
+        }
+
+        stage('Unit Testing') {
+            steps {
+                echo 'Running unit tests'
+            }
+        }
+
+        stage('Integration Testing') {
+            steps {
+                echo 'Running integration tests'
+            }
+        }
+
+        stage('Deployment') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Deploying to production'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build Successful'
+        }
+        failure {
+            echo 'Build Failed'
+        }
+        always {
+            echo 'Pipeline completed'
+        }
+    }
+}
